@@ -1,2 +1,11 @@
-# react-todo-app
-A simple todo list app built with React
+# React Todo App
+
+A simple todo list application built with React, TypeScript, and Vite.
+
+**Work in progress**
+
+## Tech Stack
+
+- React 19
+- TypeScript
+- Vite
