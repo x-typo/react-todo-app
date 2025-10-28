@@ -4,4 +4,9 @@
   align-items: center;
   min-height: 100vh;
   text-align: center;
+  width: 100vw;
+}
+
+.app h1 {
+  margin: 0;
 }
