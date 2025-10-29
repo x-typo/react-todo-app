@@ -5,7 +5,7 @@
   align-items: center;
   min-height: 100vh;
   text-align: center;
-  width: 100vw;
+  width: 100%;
 }
 
 .app h1 {
@@ -15,9 +15,12 @@
 .add-todo-section {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
 .add-todo-section button {
-  padding: 0.1em 0.6em;
+  padding: 0.3em 0.9em;
+  min-height: 2rem;
 }
