@@ -10,6 +10,7 @@
 
 .app h1 {
   margin: 0;
+  padding-bottom: 1.5rem;
 }
 
 .add-todo-section {
@@ -23,4 +24,37 @@
 .add-todo-section button {
   padding: 0.3em 0.9em;
   min-height: 2rem;
+}
+
+.todos-list {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 2rem;
+}
+
+.todos-list h2 {
+  text-decoration: underline;
+}
+
+.todos-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.todos-list li {
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.todo-date {
+  color: #666;
+  font-size: 0.85em;
+  white-space: nowrap;
+  margin-left: 1rem;
 }

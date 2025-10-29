@@ -5,6 +5,7 @@ interface Todo {
   id: number;
   text: string;
   completed: boolean;
+  createdAt: Date;
 }
 
 function TodoApp() {
@@ -18,6 +19,7 @@ function TodoApp() {
       id: Date.now(),
       text: inputValue,
       completed: false,
+      createdAt: new Date(),
     };
 
     setTodos([...todos, newTodo]);
@@ -26,7 +28,7 @@ function TodoApp() {
 
   return (
     <div className="app">
-      <h1>Todo List</h1>
+      <h1>Todo List React App</h1>
 
       <div className="add-todo-section">
         <input
@@ -39,14 +41,17 @@ function TodoApp() {
       </div>
 
       <div className="todos-list">
-        <h2>My Todos</h2>
+        <h2>My Todo:</h2>
         {todos.length === 0 ? (
-          <p>No todos yet. Add one above!</p>
+          <p>No todos yet.</p>
         ) : (
           <ul>
             {todos.map((todo) => (
               <li key={todo.id}>
                 <span>{todo.text}</span>
+                <small className="todo-date">
+                  Created: {todo.createdAt.toLocaleDateString()} at {todo.createdAt.toLocaleTimeString()}
+                </small>
               </li>
             ))}
           </ul>
