@@ -31,7 +31,7 @@ function TodoApp() {
       <div className="add-todo-section">
         <input
           type="text"
-          placeholder="Enter a new todo"
+          placeholder="What needs to be done?"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
