@@ -1,5 +1,6 @@
 .app {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -9,4 +10,14 @@
 
 .app h1 {
   margin: 0;
+}
+
+.add-todo-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-todo-section button {
+  padding: 0.1em 0.6em;
 }
