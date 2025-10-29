@@ -1,11 +1,27 @@
 import { useState } from "react";
 import "./TodoApp.css";
 
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
 function TodoApp() {
   const [inputValue, setInputValue] = useState("");
+  const [todos, setTodos] = useState<Todo[]>([]);
 
   const handleAddTodo = () => {
-    console.log("Add todo:", inputValue);
+    if (inputValue.trim() === "") return;
+
+    const newTodo: Todo = {
+      id: Date.now(),
+      text: inputValue,
+      completed: false,
+    };
+
+    setTodos([...todos, newTodo]);
+    setInputValue("");
   };
 
   return (
@@ -13,7 +29,6 @@ function TodoApp() {
       <h1>Todo List</h1>
 
       <div className="add-todo-section">
-        <h2>New Todo</h2>
         <input
           type="text"
           placeholder="Enter a new todo"
@@ -21,6 +36,21 @@ function TodoApp() {
           onChange={(e) => setInputValue(e.target.value)}
         />
         <button onClick={handleAddTodo}>Add Todo</button>
+      </div>
+
+      <div className="todos-list">
+        <h2>My Todos</h2>
+        {todos.length === 0 ? (
+          <p>No todos yet. Add one above!</p>
+        ) : (
+          <ul>
+            {todos.map((todo) => (
+              <li key={todo.id}>
+                <span>{todo.text}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
