@@ -11,7 +11,7 @@ function TodoApp() {
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const handleAddTodo = () => {
+  const addTodo = () => {
     if (inputValue.trim() === "") return;
 
     const newTodo: Todo = {
@@ -35,7 +35,7 @@ function TodoApp() {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
-        <button onClick={handleAddTodo}>Add Todo</button>
+        <button onClick={addTodo}>Add Todo</button>
       </div>
 
       <div className="todos-list">
