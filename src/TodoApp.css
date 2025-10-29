@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   text-align: center;
+  gap: 2rem;
   width: 100%;
   padding: 2rem;
   box-sizing: border-box;
@@ -31,7 +31,7 @@
 .todos-list {
   width: 100%;
   max-width: 600px;
-  margin-top: 2rem;
+  margin: 0 auto;
   text-align: center;
 }
 
