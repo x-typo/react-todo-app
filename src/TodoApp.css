@@ -50,11 +50,32 @@
   justify-content: space-between;
   align-items: center;
   text-align: left;
+  gap: 1rem;
+}
+
+.todo-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .todo-date {
   color: #666;
   font-size: 0.85em;
   white-space: nowrap;
-  margin-left: 1rem;
+}
+
+.delete-btn {
+  padding: 0.3em 0.8em;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+.delete-btn:hover {
+  background: #c82333;
 }

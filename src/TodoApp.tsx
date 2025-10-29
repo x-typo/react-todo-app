@@ -26,6 +26,10 @@ function TodoApp() {
     setInputValue("");
   };
 
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
   return (
     <div className="app">
       <h1>Todo List React App</h1>
@@ -49,9 +53,14 @@ function TodoApp() {
             {todos.map((todo) => (
               <li key={todo.id}>
                 <span>{todo.text}</span>
-                <small className="todo-date">
-                  Created: {todo.createdAt.toLocaleDateString()} at {todo.createdAt.toLocaleTimeString()}
-                </small>
+                <div className="todo-actions">
+                  <small className="todo-date">
+                    Created: {todo.createdAt.toLocaleDateString()} at {todo.createdAt.toLocaleTimeString()}
+                  </small>
+                  <button className="delete-btn" onClick={() => deleteTodo(todo.id)}>
+                    Delete
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
