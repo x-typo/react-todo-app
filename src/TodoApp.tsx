@@ -32,7 +32,7 @@ function TodoApp() {
 
   return (
     <div className="app">
-      <h1>Todo List React App</h1>
+      <h1>Todo List React App!</h1>
 
       <div className="add-todo-section">
         <input
@@ -55,9 +55,13 @@ function TodoApp() {
                 <span>{todo.text}</span>
                 <div className="todo-actions">
                   <small className="todo-date">
-                    Created: {todo.createdAt.toLocaleDateString()} at {todo.createdAt.toLocaleTimeString()}
+                    Created: {todo.createdAt.toLocaleDateString()} at{" "}
+                    {todo.createdAt.toLocaleTimeString()}
                   </small>
-                  <button className="delete-btn" onClick={() => deleteTodo(todo.id)}>
+                  <button
+                    className="delete-btn"
+                    onClick={() => deleteTodo(todo.id)}
+                  >
                     Delete
                   </button>
                 </div>
