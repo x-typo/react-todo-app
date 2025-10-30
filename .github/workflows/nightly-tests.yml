@@ -65,7 +65,7 @@ jobs:
           to: ${{ env.MAIL_END_USER }}
           subject: React Todo App (React) - Test Results (${{ job.status }})
           body: |
-            Test automation results for React Todo App (React)
+            Test automation results for Todo App (React)
 
             Status: ${{ job.status }}
             Workflow: ${{ github.workflow }}
