@@ -80,8 +80,8 @@ When creating PRs, follow this workflow:
 
    ```bash
    git checkout main
-   git pull origin main  # Ensure you are working with the latest code
-   git checkout -b <type>/<description>  # <type> should match an accepted commit type (e.g., feat, fix)
+   git pull origin main
+   git checkout -b <type>/<description>
    # Make your changes
    git add .
    git commit -m "<emoji> <type>: <message>"
