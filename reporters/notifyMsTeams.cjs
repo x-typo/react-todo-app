@@ -6,7 +6,7 @@ module.exports = {
       inputs: {
         url: process.env.TEAMS_WEBHOOK_URL,
         publish: "test-summary-slim",
-        title: "React Todo App - Test Results",
+        title: "Todo App (React) - Test Results",
         title_link: "https://github.com/x-typo/react-todo-app",
         width: "full",
       },
@@ -21,7 +21,7 @@ module.exports = {
                 url: "https://github.com/x-typo",
               },
               {
-                text: "Repo - React Todo App",
+                text: "Repo - Todo App (React)",
                 url: "https://github.com/x-typo/react-todo-app",
               },
               {
