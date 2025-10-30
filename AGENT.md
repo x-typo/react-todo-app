@@ -8,20 +8,22 @@ This project uses **gitmoji** for commit messages. Always include the appropriat
 
 ### Common Gitmojis
 
-- ✨ `:sparkles:` - New features
-- 🐛 `:bug:` - Bug fixes
-- 📝 `:memo:` - Documentation changes
-- ♻️ `:recycle:` - Code refactoring
-- ✅ `:white_check_mark:` - Adding or updating tests
-- 🎨 `:art:` - Code style/formatting improvements
-- ⚡ `:zap:` - Performance improvements
-- 🔧 `:wrench:` - Configuration changes
-- 🚀 `:rocket:` - Deployment changes
-- 🔒 `:lock:` - Security fixes
-- ⬆️ `:arrow_up:` - Upgrading dependencies
-- ⬇️ `:arrow_down:` - Downgrading dependencies
-- 🔥 `:fire:` - Removing code or files
-- 🚨 `:rotating_light:` - Fixing linter warnings
+- `:sparkles:` - New features
+- `:bug:` - Bug fixes
+- `:memo:` - Documentation changes
+- `:recycle:` - Code refactoring
+- `:white_check_mark:` - Adding or updating tests
+- `:art:` - Code style/formatting improvements
+- `:zap:` - Performance improvements
+- `:wrench:` - Configuration changes
+- `:rocket:` - Deployment changes
+- `:lock:` - Security fixes
+- `:arrow_up:` - Upgrading dependencies
+- `:arrow_down:` - Downgrading dependencies
+- `:fire:` - Removing code or files
+- `:rotating_light:` - Fixing linter warnings
+
+Refer to [gitmoji.dev](https://gitmoji.dev) for the full catalog.
 
 ### Commit Message Format
 
@@ -31,13 +33,25 @@ This project uses **gitmoji** for commit messages. Always include the appropriat
 <body>
 ```
 
+### Accepted Commit Types
+
+- `feat` - user-facing enhancements or features
+- `fix` - bug fixes
+- `docs` - documentation-only updates
+- `refactor` - structural changes that retain existing behavior
+- `test` - add or update automated tests
+- `style` - formatting or presentation adjustments with no logic impact
+- `perf` - performance improvements
+- `chore` - tooling, build, or maintenance tasks
+- `deps` - dependency updates (combine with `:arrow_up:` or `:arrow_down:` gitmoji)
+
 **Examples:**
 
 ```
-✨ feat: add email notifications for test results
-🐛 fix: resolve authentication timeout issue
-📝 docs: update README with setup instructions
-♻️ refactor: simplify todo item state management
+:sparkles: feat: add email notifications for test results
+:bug: fix: resolve authentication timeout issue
+:memo: docs: update README with setup instructions
+:recycle: refactor: simplify todo item state management
 ```
 
 ## Testing Requirements
@@ -45,6 +59,11 @@ This project uses **gitmoji** for commit messages. Always include the appropriat
 - Always run tests before creating commits: `npm run test:run`
 - Ensure all tests pass before creating pull requests
 - Add tests for new features and bug fixes
+
+## Linting
+
+- Run linting before pushing changes: `npm run lint`
+- Resolve lint errors or warnings locally before opening a PR
 
 ## Pull Request Guidelines
 
@@ -61,8 +80,8 @@ When creating PRs, follow this workflow:
 
    ```bash
    git checkout main
-   git pull origin main  # Ensure you're working with the latest code
-   git checkout -b <type>/<description>
+   git pull origin main  # Ensure you are working with the latest code
+   git checkout -b <type>/<description>  # <type> should match an accepted commit type (e.g., feat, fix)
    # Make your changes
    git add .
    git commit -m "<emoji> <type>: <message>"
