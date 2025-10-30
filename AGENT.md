@@ -107,7 +107,7 @@ push feat add-login ":sparkles: feat: add login form"
 3. Stage all changes and commit with the provided message.
 4. `git fetch origin <base>` then **rebase onto** `origin/<base>` (linear history).
 5. `git push -u origin HEAD`.
-6. If GitHub CLI is available, open the existing PR (or create a Draft PR first) in the browser; otherwise the helper launches `https://github.com/x-typo/react-todo-app/pull/new/<branch>` so you can finish manually.
+6. If GitHub CLI is available, open the existing PR (or create a Draft PR first) in the browser; otherwise the helper launches `https://github.com/<account>/<repo>/pull/new/<branch>`.
 7. Switch back to `<base>` and fast-forward pull.
 
 **Guardrails / failure handling**
