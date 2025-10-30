@@ -107,7 +107,7 @@ push feat add-login ":sparkles: feat: add login form"
 3. Stage all changes and commit with the provided message.
 4. `git fetch origin <base>` then **rebase onto** `origin/<base>` (linear history).
 5. `git push -u origin HEAD`.
-6. Open a **Draft PR** with auto-filled title/body against `<base>`.
+6. If a PR already exists for the branch, open it in the browser; otherwise create a **Draft PR** with auto-filled title/body against `<base>`, then open it.
 7. Switch back to `<base>` and fast-forward pull.
 
 **Guardrails / failure handling**
@@ -155,7 +155,3 @@ git remote set-head origin --auto
 - `/src/components` — React components
 - `/test-results` — Test output and reports
 - `/.github/workflows` — CI/CD workflows
-
-```
-::contentReference[oaicite:0]{index=0}
-```
