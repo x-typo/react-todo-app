@@ -63,7 +63,7 @@ jobs:
           password: ${{ env.MAIL_PASSWORD }}
           from: ${{ env.MAIL_USERNAME }}
           to: ${{ env.MAIL_END_USER }}
-          subject: React Todo App (React) - Test Results (${{ job.status }})
+          subject: Todo App (React) - Test Results (${{ job.status }})
           body: |
             Test automation results for Todo App (React)
 
