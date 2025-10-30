@@ -50,6 +50,35 @@ This project uses **gitmoji** for commit messages. Always include the appropriat
 - Reference related issues if applicable
 - Ensure CI/CD checks pass
 
+## Git Workflow
+
+When creating PRs, follow this workflow:
+
+1. **Create branch and make changes:**
+   ```bash
+   git checkout main
+   git checkout -b <type>/<description>
+   # Make your changes
+   git add .
+   git commit -m "<emoji> <type>: <message>"
+   ```
+
+2. **Push to remote:**
+   ```bash
+   git push -u origin <branch-name>
+   ```
+
+3. **Switch back to main immediately after push:**
+   ```bash
+   git checkout main
+   ```
+   This keeps your working directory clean and ready for the next task.
+
+4. **After PR is merged on GitHub:**
+   - Branch will be automatically deleted on GitHub (if auto-delete is enabled)
+   - Pull the latest main: `git pull origin main`
+   - Delete local branch: `git branch -d <branch-name>`
+
 ## Code Style
 
 - This is a React + TypeScript project
