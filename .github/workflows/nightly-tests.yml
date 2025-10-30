@@ -72,3 +72,11 @@ jobs:
             Run: #${{ github.run_number }}
 
             View detailed results: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+      - name: Notify MS Teams
+        if: always()
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          npx test-results-reporter publish -c notifyMsTeams.cjs
+        working-directory: reporters
