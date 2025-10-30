@@ -1,6 +1,6 @@
 # AI Agent Instructions
 
-This file contain guidelines for AI assistants working on this project.
+This file contains guidelines for AI assistants working on this project.
 
 ---
 
