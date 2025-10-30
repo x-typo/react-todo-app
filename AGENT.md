@@ -102,12 +102,12 @@ push feat add-login ":sparkles: feat: add login form"
 
 **Deterministic steps the function executes**
 
-1. Detect base branch from `origin/HEAD` (fallback `main`) and **fast-forward-only** pull.
+1. Detect base branch from `origin/HEAD` (fallback `main`) and fast-forward-only pull when the working tree is clean; otherwise fetch `origin/<base>` so rebase still sees the latest commits.
 2. Create/switch to feature branch `<type>/<kebab-desc>` (reuses existing if present).
 3. Stage all changes and commit with the provided message.
 4. `git fetch origin <base>` then **rebase onto** `origin/<base>` (linear history).
 5. `git push -u origin HEAD`.
-6. If a PR already exists for the branch, open it in the browser; otherwise create a **Draft PR** with auto-filled title/body against `<base>`, then open it.
+6. If GitHub CLI is available, open the existing PR (or create a Draft PR first) in the browser; otherwise the helper launches `https://github.com/x-typo/react-todo-app/pull/new/<branch>` so you can finish manually.
 7. Switch back to `<base>` and fast-forward pull.
 
 **Guardrails / failure handling**
