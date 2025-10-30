@@ -2,30 +2,13 @@
 
 This file contains guidelines for AI assistants working on this project.
 
+---
+
 ## Commit Message Convention
 
-This project uses **gitmoji** for commit messages. Always include the appropriate emoji when creating commits:
+This project uses **gitmoji + Conventional Commits**. Always include the appropriate emoji **and** type.
 
-### Common Gitmojis
-
-- `:sparkles:` - New features
-- `:bug:` - Bug fixes
-- `:memo:` - Documentation changes
-- `:recycle:` - Code refactoring
-- `:white_check_mark:` - Adding or updating tests
-- `:art:` - Code style/formatting improvements
-- `:zap:` - Performance improvements
-- `:wrench:` - Configuration changes
-- `:rocket:` - Deployment changes
-- `:lock:` - Security fixes
-- `:arrow_up:` - Upgrading dependencies
-- `:arrow_down:` - Downgrading dependencies
-- `:fire:` - Removing code or files
-- `:rotating_light:` - Fixing linter warnings
-
-Refer to [gitmoji.dev](https://gitmoji.dev) for the full catalog.
-
-### Commit Message Format
+**Format**
 
 ```
 <emoji> <type>: <subject>
@@ -33,19 +16,36 @@ Refer to [gitmoji.dev](https://gitmoji.dev) for the full catalog.
 <body>
 ```
 
-### Accepted Commit Types
+**Common Gitmojis**
 
-- `feat` - user-facing enhancements or features
-- `fix` - bug fixes
-- `docs` - documentation-only updates
-- `refactor` - structural changes that retain existing behavior
-- `test` - add or update automated tests
-- `style` - formatting or presentation adjustments with no logic impact
-- `perf` - performance improvements
-- `chore` - tooling, build, or maintenance tasks
-- `deps` - dependency updates (combine with `:arrow_up:` or `:arrow_down:` gitmoji)
+- `:sparkles:` – New features
+- `:bug:` – Bug fixes
+- `:memo:` – Documentation changes
+- `:recycle:` – Code refactoring
+- `:white_check_mark:` – Add/update tests
+- `:art:` – Style/format only
+- `:zap:` – Performance improvements
+- `:wrench:` – Configuration changes
+- `:rocket:` – Deployment changes
+- `:lock:` – Security fixes
+- `:arrow_up:` – Upgrade deps
+- `:arrow_down:` – Downgrade deps
+- `:fire:` – Remove code/files
+- `:rotating_light:` – Fix linter warnings
 
-**Examples:**
+**Accepted Commit Types**
+
+- `feat` – user-facing enhancements or features
+- `fix` – bug fixes
+- `docs` – documentation-only updates
+- `refactor` – structural changes that retain behavior
+- `test` – add or update automated tests
+- `style` – formatting with no logic impact
+- `perf` – performance improvements
+- `chore` – tooling/build/maintenance
+- `deps` – dependency updates
+
+**Examples**
 
 ```
 :sparkles: feat: add email notifications for test results
@@ -54,69 +54,108 @@ Refer to [gitmoji.dev](https://gitmoji.dev) for the full catalog.
 :recycle: refactor: simplify todo item state management
 ```
 
+---
+
 ## Testing Requirements
 
-- Always run tests before creating commits: `npm run test:run`
-- Ensure all tests pass before creating pull requests
-- Add tests for new features and bug fixes
+- Always run tests before creating pull requests: `npm run test:run`
+- Ensure all tests pass; add tests for new features and fixes
+
+---
 
 ## Linting
 
 - Run linting before pushing changes: `npm run lint`
-- Resolve lint errors or warnings locally before opening a PR
+- Resolve lint errors/warnings locally before opening a PR
+
+---
 
 ## Pull Request Guidelines
 
-- Use descriptive PR titles with gitmoji
-- Include a clear summary of changes
-- Reference related issues if applicable
-- Ensure CI/CD checks pass
+- Use descriptive PR titles with gitmoji (e.g., `:bug: fix: handle null token`)
+- Include a clear summary of changes; reference related issues
+- Ensure CI/CD checks pass before merge
 
-## Git Workflow
+---
 
-When creating PRs, follow this workflow:
+## Git Workflow (Agent-Driven, One Command)
 
-1. **Create branch and make changes:**
+**Trigger phrase:** “push the changes”
 
-   ```bash
-   git checkout main
-   git pull origin main
-   git checkout -b <type>/<description>
-   # Make your changes
-   git add .
-   git commit -m "<emoji> <type>: <message>"
-   ```
+**Action (agent computes arguments, then runs):**
 
-2. **Push to remote:**
+```powershell
+push <type> <kebab-desc> "<emoji> <type>: <subject>"
+# Example:
+push feat add-login ":sparkles: feat: add login form"
+```
 
-   ```bash
-   git push -u origin <branch-name>
-   ```
+- `<kebab-desc>` is derived from `<subject>` (lowercase, alphanumerics/hyphen).
 
-3. **Switch back to main immediately after push:**
-   ```bash
-   git checkout main
-   ```
-   This keeps your working directory clean and ready for the next task.
+> If the `pushmsg` helper exists in the user’s profile, you may alternatively run:
+>
+> ```powershell
+> pushmsg "<type>: <subject>"
+> # Example:
+> pushmsg "feat: add login form"
+> ```
+
+**Deterministic steps the function executes**
+
+1. Detect base branch from `origin/HEAD` (fallback `main`) and **fast-forward-only** pull.
+2. Create/switch to feature branch `<type>/<kebab-desc>` (reuses existing if present).
+3. Stage all changes and commit with the provided message.
+4. `git fetch origin <base>` then **rebase onto** `origin/<base>` (linear history).
+5. `git push -u origin HEAD`.
+6. Open a **Draft PR** with auto-filled title/body against `<base>`.
+7. Switch back to `<base>` and fast-forward pull.
+
+**Guardrails / failure handling**
+
+- **Pull refused (non-FF) or rebase conflicts:** stop and prompt the user to resolve, then:
+  ```powershell
+  git add -A
+  git rebase --continue
+  git push -u origin HEAD
+  ```
+- **No changes to commit:** exit with “No changes to commit.”
+- **Never** force-push or merge in this workflow.
+
+**Prereqs (once per machine)**
+
+```powershell
+gh auth login        # web flow; stores token
+gh auth setup-git    # wire Git to the GH token
+# If base detection misbehaves, realign origin/HEAD:
+git remote set-head origin --auto
+```
+
+---
 
 ## Code Style
 
-- This is a React + TypeScript project
-- Follow existing code patterns and conventions
-- Use functional components with hooks
+- React + TypeScript
+- Follow existing patterns; functional components with hooks
 - Keep components small and focused
-- Write meaningful variable and function names
+- Use meaningful names
+
+---
 
 ## GitHub Actions
 
-- Test automation runs daily at 8 AM UTC via cron schedule
-- Can be triggered manually via workflow_dispatch
-- Email notifications are sent after each test run
+- Test automation runs daily at 08:00 UTC (cron) and supports `workflow_dispatch`
+- Email notifications are sent after each run
 - JUnit reports are generated and published
+
+---
 
 ## Project Structure
 
-- `/src` - Application source code
-- `/src/components` - React components
-- `/test-results` - Test output and reports
-- `/.github/workflows` - CI/CD workflows
+- `/src` — Application source code
+- `/src/components` — React components
+- `/test-results` — Test output and reports
+- `/.github/workflows` — CI/CD workflows
+
+```
+::contentReference[oaicite:0]{index=0}
+```
