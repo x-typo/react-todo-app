@@ -5,13 +5,19 @@ on:
     - cron: "0 8 * * *"
   workflow_dispatch:
 
+permissions:
+  checks: write
+  pull-requests: write
+  contents: read
+
+env:
+  MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+  MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+  MAIL_END_USER: ${{ secrets.MAIL_END_USER }}
+
 jobs:
   test:
     runs-on: ubuntu-latest
-    permissions:
-      checks: write
-      pull-requests: write
-      contents: read
 
     steps:
       - name: Checkout code
@@ -46,3 +52,23 @@ jobs:
           check_run: false
           files: |
             test-results/junit.xml
+
+      - name: Send Email
+        uses: dawidd6/action-send-mail@v3.11.0
+        if: always()
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ env.MAIL_USERNAME }}
+          password: ${{ env.MAIL_PASSWORD }}
+          from: ${{ env.MAIL_USERNAME }}
+          to: ${{ env.MAIL_END_USER }}
+          subject: React Todo App - Test Results (${{ job.status }})
+          body: |
+            Test automation results for React Todo App
+
+            Status: ${{ job.status }}
+            Workflow: ${{ github.workflow }}
+            Run: #${{ github.run_number }}
+
+            View detailed results: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
