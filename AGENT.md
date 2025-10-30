@@ -7,6 +7,7 @@ This file contains guidelines for AI assistants working on this project.
 This project uses **gitmoji** for commit messages. Always include the appropriate emoji when creating commits:
 
 ### Common Gitmojis
+
 - ✨ `:sparkles:` - New features
 - 🐛 `:bug:` - Bug fixes
 - 📝 `:memo:` - Documentation changes
@@ -23,6 +24,7 @@ This project uses **gitmoji** for commit messages. Always include the appropriat
 - 🚨 `:rotating_light:` - Fixing linter warnings
 
 ### Commit Message Format
+
 ```
 <emoji> <type>: <subject>
 
@@ -30,6 +32,7 @@ This project uses **gitmoji** for commit messages. Always include the appropriat
 ```
 
 **Examples:**
+
 ```
 ✨ feat: add email notifications for test results
 🐛 fix: resolve authentication timeout issue
@@ -49,6 +52,33 @@ This project uses **gitmoji** for commit messages. Always include the appropriat
 - Include a clear summary of changes
 - Reference related issues if applicable
 - Ensure CI/CD checks pass
+
+## Git Workflow
+
+When creating PRs, follow this workflow:
+
+1. **Create branch and make changes:**
+
+   ```bash
+   git checkout main
+   git pull origin main  # Ensure you're working with the latest code
+   git checkout -b <type>/<description>
+   # Make your changes
+   git add .
+   git commit -m "<emoji> <type>: <message>"
+   ```
+
+2. **Push to remote:**
+
+   ```bash
+   git push -u origin <branch-name>
+   ```
+
+3. **Switch back to main immediately after push:**
+   ```bash
+   git checkout main
+   ```
+   This keeps your working directory clean and ready for the next task.
 
 ## Code Style
 
