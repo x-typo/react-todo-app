@@ -4,6 +4,38 @@ This file contains guidelines for AI assistants working on this project.
 
 ---
 
+## Project Overview
+
+- Single-page React 19 app bootstrapped with Vite; `src/main.tsx` mounts the root `TodoApp` component.
+- Todos exist only in component state; no persistence layer or remote services are involved yet.
+- Keep `TodoApp` as the primary stateful container; add shared elements under `src/components/` when the UI grows.
+
+## Component & Styling Patterns
+
+- Maintain the todo shape `{ id: number; text: string; completed: boolean; createdAt: Date }`. Preserve the `Date` instance so timestamp rendering and tests keep working.
+- UI logic lives in `src/TodoApp.tsx` with sibling styles in `src/TodoApp.css`. Mirror this co-location pattern when adding new feature views.
+- Stick with native HTML form controls unless a new dependency brings clear value. Update docs/tests if you introduce additional UI libraries.
+
+## State & Behavior Guardrails
+
+- Todo IDs come from `Date.now()`. If you change the strategy, ensure uniqueness and update tests that rely on ordering or rendering.
+- The heading copy ("Todo List React App...") and empty-state text ("No todos yet.") are asserted in `src/__tests__/TodoApp.test.tsx`; adjust tests if you tweak copy.
+
+## Testing Workflow
+
+- Component tests run via Vitest + React Testing Library; configuration lives in `vitest.config.ts` using the jsdom environment.
+- Test files sit under `src/__tests__/`. Shared matchers load from `src/__tests__/setupTests.ts`; extend there when you need additional globals.
+- Primary CI command: `npm run test:run` (emits `test-results/junit.xml` consumed by test reporters and Teams notifications).
+- For interactive runs, use `npm run test -- --watch`.
+
+## Tooling & Commands
+
+- Start the dev server with `npm run dev`. Always lint (`npm run lint`) and build (`npm run build`) before shipping larger changes.
+- Keep TypeScript options in `tsconfig.app.json` intact—especially the included typings for `vitest/globals` and `@testing-library/jest-dom`.
+- Nightly CI workflow lives at `.github/workflows/nightly-tests.yml`; it depends on `reporters/notifyMsTeams.cjs` and the `test-results/junit.xml` path. Update both if artifacts move.
+
+---
+
 ## Commit Message Convention
 
 This project uses **gitmoji + Conventional Commits**. Always include the appropriate emoji **and** type.
